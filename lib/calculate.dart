@@ -10,9 +10,9 @@ class Calculator extends StatefulWidget {
 class _CalculatorState extends State<Calculator> {
   double _num1 = 0.0;
   double _num2 = 0.0;
-  String _result = "0";
-  String _display = "0";
-  String _operand = "";
+  String _result = '0';
+  String _display = '0';
+  String _operand = '';
   String _memory = '';
 
   int countDecimalPlaces(String numStr) {
@@ -28,11 +28,11 @@ class _CalculatorState extends State<Calculator> {
       child: Container(
         padding: const EdgeInsets.all(6.0),
         decoration: BoxDecoration(
-          color: (buttonText == "+" ||
-                  buttonText == "-" ||
-                  buttonText == "X" ||
-                  buttonText == "/" ||
-                  buttonText == "=")
+          color: (buttonText == '+' ||
+                  buttonText == '-' ||
+                  buttonText == 'X' ||
+                  buttonText == '/' ||
+                  buttonText == '=')
               ? Colors.teal
               : Color.fromARGB(255, 25, 16, 49),
           borderRadius: BorderRadius.circular(35.0),
@@ -53,12 +53,12 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void buttonPressed(String buttonText) {
-    if (buttonText == "CLEAR") {
+    if (buttonText == 'CLEAR') {
       _num1 = 0.0;
       _num2 = 0.0;
-      _result = "0";
-      _display = "0";
-      _operand = "";
+      _result = '0';
+      _display = '0';
+      _operand = '';
     } else if (buttonText == 'MR') {
       _display = _memory;
     } else if (buttonText == 'MC') {
@@ -70,51 +70,51 @@ class _CalculatorState extends State<Calculator> {
       double invertedNum = -1 * num;
       String numStr = invertedNum.toString();
       _memory = numStr;
-    } else if (buttonText == "%") {
+    } else if (buttonText == '%') {
       _num1 = double.parse(_display);
       _display = (_num1 / 100).toString();
-    } else if (buttonText == "+" ||
-        buttonText == "-" ||
-        buttonText == "X" ||
-        buttonText == "/") {
+    } else if (buttonText == '+' ||
+        buttonText == '-' ||
+        buttonText == 'X' ||
+        buttonText == '/') {
       _num1 = double.parse(_display);
       _display = buttonText;
       _operand = buttonText;
-    } else if (buttonText == ".") {
-      if (_display.contains(".")) {
+    } else if (buttonText == '.') {
+      if (_display.contains('.')) {
         return;
       } else {
         _display = _display + buttonText;
       }
-    } else if (buttonText == "=") {
+    } else if (buttonText == '=') {
       _num2 = double.parse(_display);
-      if (_operand == "+") {
+      if (_operand == '+') {
         _display = (_num1 + _num2).toString();
       }
-      if (_operand == "-") {
+      if (_operand == '-') {
         _display = (_num1 - _num2).toString();
       }
-      if (_operand == "X") {
+      if (_operand == 'X') {
         _display = (_num1 * _num2).toString();
       }
-      if (_operand == "/") {
+      if (_operand == '/') {
         _display = (_num1 / _num2).toString();
       }
 
       _num1 = 0.0;
       _num2 = 0.0;
-      _operand = "";
+      _operand = '';
       if (countDecimalPlaces(_display) <= 2) {
         _display = _display;
       } else {
         _display = double.parse(_display).toStringAsFixed(2);
       }
     } else {
-      if (_display == "0" ||
-          _display == "+" ||
-          _display == "-" ||
-          _display == "X" ||
-          _display == "/") {
+      if (_display == '0' ||
+          _display == '+' ||
+          _display == '-' ||
+          _display == 'X' ||
+          _display == '/') {
         _display = buttonText;
       } else {
         _display = _display + buttonText;
@@ -183,32 +183,32 @@ class _CalculatorState extends State<Calculator> {
                         buildButton('M-'),
                         buildButton('MR')
                       ]),
-                      buildButton("7"),
-                      buildButton("8"),
-                      buildButton("9"),
-                      buildButton("/")
+                      buildButton('7'),
+                      buildButton('8'),
+                      buildButton('9'),
+                      buildButton('/')
                     ]),
                     Row(children: [
-                      buildButton("4"),
-                      buildButton("5"),
-                      buildButton("6"),
-                      buildButton("X")
+                      buildButton('4'),
+                      buildButton('5'),
+                      buildButton('6'),
+                      buildButton('X')
                     ]),
                     Row(children: [
-                      buildButton("1"),
-                      buildButton("2"),
-                      buildButton("3"),
-                      buildButton("-")
+                      buildButton('1'),
+                      buildButton('2'),
+                      buildButton('3'),
+                      buildButton('-')
                     ]),
                     Row(children: [
-                      buildButton("."),
-                      buildButton("0"),
-                      buildButton("00"),
-                      buildButton("+")
+                      buildButton('.'),
+                      buildButton('0'),
+                      buildButton('00'),
+                      buildButton('+')
                     ]),
                     Row(children: [
-                      buildButton("CLEAR"),
-                      buildButton("="),
+                      buildButton('CLEAR'),
+                      buildButton('='),
                     ])
                   ]),
             )
