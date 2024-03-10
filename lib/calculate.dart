@@ -203,7 +203,7 @@ class _CalculatorState extends State<Calculator> {
                     Row(children: [
                       buildButton('.'),
                       buildButton('0'),
-                      buildButton('00'),
+                      buildButton('%'),
                       buildButton('+')
                     ]),
                     Row(children: [
