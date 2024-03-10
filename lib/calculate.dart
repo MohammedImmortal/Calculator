@@ -8,23 +8,33 @@ class Calculator extends StatefulWidget {
 }
 
 class _CalculatorState extends State<Calculator> {
-  String output = "0";
-  String _output = "0";
-  double num1 = 0.0;
-  double num2 = 0.0;
-  String operand = "";
+  double _num1 = 0.0;
+  double _num2 = 0.0;
+  String _result = "0";
+  String _display = "0";
+  String _operand = "";
 
   Widget buildButton(String buttonText) {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(5.0),
-        child: OutlinedButton(
+      child: Container(
+        padding: const EdgeInsets.all(6.0),
+        decoration: BoxDecoration(
+          color: (buttonText == "+" ||
+                  buttonText == "-" ||
+                  buttonText == "X" ||
+                  buttonText == "/" ||
+                  buttonText == "=")
+              ? Colors.teal
+              : Color.fromARGB(255, 25, 16, 49),
+          borderRadius: BorderRadius.circular(35.0),
+        ),
+        child: TextButton(
           child: Text(
             buttonText,
-            style: const TextStyle(
-              fontSize: 20.0,
+            style: TextStyle(
+              fontSize: 25.0,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
           onPressed: () => buttonPressed(buttonText),
@@ -33,48 +43,50 @@ class _CalculatorState extends State<Calculator> {
     );
   }
 
-  buttonPressed(String buttonText) {
+  void buttonPressed(String buttonText) {
     if (buttonText == "CLEAR") {
-      _output = "0";
-      num1 = 0.0;
-      num2 = 0.0;
-      operand = "";
+      _num1 = 0.0;
+      _num2 = 0.0;
+      _result = "0";
+      _display = "0";
+      _operand = "";
     } else if (buttonText == "+" ||
         buttonText == "-" ||
-        buttonText == "/" ||
-        buttonText == "X") {
-      num1 = double.parse(output);
-      output = buttonText;
-      operand = buttonText;
-      _output = "0";
+        buttonText == "X" ||
+        buttonText == "/") {
+      _num1 = double.parse(_result);
+      _result = buttonText;
+      _operand = buttonText;
+      _display = "0";
     } else if (buttonText == ".") {
-      if (_output.contains(".")) {
+      if (_display.contains(".")) {
         return;
       } else {
-        _output = _output + buttonText;
+        _display = _display + buttonText;
       }
     } else if (buttonText == "=") {
-      num2 = double.parse(output);
-      if (operand == "+") {
-        _output = (num1 + num2).toString();
+      _num2 = double.parse(_result);
+      if (_operand == "+") {
+        _display = (_num1 + _num2).toString();
       }
-      if (operand == "-") {
-        _output = (num1 - num2).toString();
+      if (_operand == "-") {
+        _display = (_num1 - _num2).toString();
       }
-      if (operand == "X") {
-        _output = (num1 * num2).toString();
+      if (_operand == "X") {
+        _display = (_num1 * _num2).toString();
       }
-      if (operand == "/") {
-        _output = (num1 / num2).toString();
+      if (_operand == "/") {
+        _display = (_num1 / _num2).toString();
       }
-      num1 = 0.0;
-      num2 = 0.0;
-      operand = "";
+
+      _num1 = 0.0;
+      _num2 = 0.0;
+      _operand = "";
     } else {
-      _output = _output + buttonText;
+      _display = _display + buttonText;
     }
 
-    setState(() => output = double.parse(_output).toStringAsFixed(2));
+    setState(() => _result = double.parse(_display).toStringAsFixed(2));
   }
 
   @override
@@ -91,50 +103,58 @@ class _CalculatorState extends State<Calculator> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              alignment: Alignment.centerRight,
-              padding:
-                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 12.0),
-              child: Text(
-                output,
-                style: const TextStyle(
-                  fontSize: 48.0,
-                  fontWeight: FontWeight.bold,
+            Expanded(
+              child: Container(
+                color: Colors.black,
+                alignment: Alignment.topRight,
+                padding: const EdgeInsets.symmetric(
+                    vertical: 25.0, horizontal: 15.0),
+                child: Text(
+                  _result,
+                  style: const TextStyle(
+                    fontSize: 50.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-            const Spacer(),
-            Column(children: [
-              const Divider(),
-              Row(children: [
-                buildButton("7"),
-                buildButton("8"),
-                buildButton("9"),
-                buildButton("/")
-              ]),
-              Row(children: [
-                buildButton("4"),
-                buildButton("5"),
-                buildButton("6"),
-                buildButton("X")
-              ]),
-              Row(children: [
-                buildButton("1"),
-                buildButton("2"),
-                buildButton("3"),
-                buildButton("-")
-              ]),
-              Row(children: [
-                buildButton("."),
-                buildButton("0"),
-                buildButton("00"),
-                buildButton("+")
-              ]),
-              Row(children: [
-                buildButton("CLEAR"),
-                buildButton("="),
-              ])
-            ])
+            Container(
+              height: 450,
+              color: Color.fromARGB(255, 25, 16, 49),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(children: [
+                      buildButton("7"),
+                      buildButton("8"),
+                      buildButton("9"),
+                      buildButton("/")
+                    ]),
+                    Row(children: [
+                      buildButton("4"),
+                      buildButton("5"),
+                      buildButton("6"),
+                      buildButton("X")
+                    ]),
+                    Row(children: [
+                      buildButton("1"),
+                      buildButton("2"),
+                      buildButton("3"),
+                      buildButton("-")
+                    ]),
+                    Row(children: [
+                      buildButton("."),
+                      buildButton("0"),
+                      buildButton("00"),
+                      buildButton("+")
+                    ]),
+                    Row(children: [
+                      buildButton("CLEAR"),
+                      buildButton("="),
+                    ])
+                  ]),
+            )
           ],
         ),
       ),
