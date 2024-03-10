@@ -34,13 +34,13 @@ class _CalculatorState extends State<Calculator> {
                   buttonText == '/' ||
                   buttonText == '=')
               ? Colors.teal
-              : Color.fromARGB(255, 25, 16, 49),
+              : const Color.fromARGB(255, 25, 16, 49),
           borderRadius: BorderRadius.circular(35.0),
         ),
         child: TextButton(
           child: Text(
             buttonText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 25.0,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -172,7 +172,7 @@ class _CalculatorState extends State<Calculator> {
             ),
             Container(
               height: 450,
-              color: Color.fromARGB(255, 25, 16, 49),
+              color: const Color.fromARGB(255, 25, 16, 49),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
