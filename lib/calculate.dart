@@ -171,18 +171,18 @@ class _CalculatorState extends State<Calculator> {
               ),
             ),
             Container(
-              height: 450,
+              height: 500,
               color: const Color.fromARGB(255, 25, 16, 49),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(children: [
-                      Row(children: [
-                        buildButton('MC'),
-                        buildButton('M+'),
-                        buildButton('M-'),
-                        buildButton('MR')
-                      ]),
+                      buildButton('MC'),
+                      buildButton('M+'),
+                      buildButton('M-'),
+                      buildButton('MR')
+                    ]),
+                    Row(children: [
                       buildButton('7'),
                       buildButton('8'),
                       buildButton('9'),
