@@ -13,6 +13,7 @@ class _CalculatorState extends State<Calculator> {
   String _result = "0";
   String _display = "0";
   String _operand = "";
+  String _memory = '';
 
   int countDecimalPlaces(String numStr) {
     int decimalIndex = numStr.indexOf('.');
@@ -58,6 +59,17 @@ class _CalculatorState extends State<Calculator> {
       _result = "0";
       _display = "0";
       _operand = "";
+    } else if (buttonText == 'MR') {
+      _display = _memory;
+    } else if (buttonText == 'MC') {
+      _memory = '';
+    } else if (buttonText == 'M+') {
+      _memory = _display;
+    } else if (buttonText == 'M-') {
+      double num = double.parse(_display);
+      double invertedNum = -1 * num;
+      String numStr = invertedNum.toString();
+      _memory = numStr;
     } else if (buttonText == "%") {
       _num1 = double.parse(_display);
       _display = (_num1 / 100).toString();
@@ -126,6 +138,22 @@ class _CalculatorState extends State<Calculator> {
       body: SafeArea(
         child: Column(
           children: [
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+              color: Colors.black,
+              child: Row(
+                children: [
+                  Text(
+                    'M',
+                    style: TextStyle(
+                      color: _memory == '' ? Colors.black : Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Container(
                 color: Colors.black,
@@ -149,6 +177,12 @@ class _CalculatorState extends State<Calculator> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Row(children: [
+                      Row(children: [
+                        buildButton('MC'),
+                        buildButton('M+'),
+                        buildButton('M-'),
+                        buildButton('MR')
+                      ]),
                       buildButton("7"),
                       buildButton("8"),
                       buildButton("9"),
